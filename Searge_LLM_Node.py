@@ -151,20 +151,33 @@ class Searge_LLM_Node:
             else:
                 messages = [
                     {"role": "system",
-                     "content": f"You are a helpful assistant."},
+                     "content": f"You are a helpful assistant. Try your best to give the best response possible to "
+                                f"the user."},
                     {"role": "user",
-                     "content": f"An image generation prompt is a single paragraph summary to describe the subject and "
-                                f"style of an image. It includes a description of the kind of image, the subject of "
-                                f"the image, and some description of the image medium and style in the form of short "
-                                f"keyword.\n\nCreate an image generation prompt for the subject \"a creepy creature "
-                                f"shadow in the dark in a dimly lit tunnel\" in the style \"digital art illustration "
-                                f"with intricate details\"."},
-                    {"role": "assistant",
-                     "content": f"A digitally crafted illustration portrays a chilling scene within a dimly lit, "
-                                f"cavernous tunnel. The dominant subject of the image is a mysterious creature, its "
-                                f"form subtly discernible only as a menacing shadow on the walls of the tunnel..."},
-                    {"role": "user",
-                     "content": f"Create a detailed visually descriptive caption for this description:\n{text}"},
+                     "content": f"Create a detailed visually descriptive caption of this description, which will be "
+                                f"used as a prompt for a text to image AI system (caption only, no instructions like "
+                                f"\"create an image\").Remove any mention of digital artwork or artwork style. Give "
+                                f"detailed visual descriptions of the character(s), including ethnicity, skin tone, "
+                                f"expression etc. Imagine using keywords for a still for someone who has aphantasia. "
+                                f"Describe the image style, e.g. any photographic or art styles / techniques utilized. "
+                                f"Make sure to fully describe all aspects of the cinematography, with abundant "
+                                f"technical details and visual descriptions. If there is more than one image, combine "
+                                f"the elements and characters from all of the images creatively into a single "
+                                f"cohesive composition with a single background, inventing an interaction between the "
+                                f"characters. Be creative in combining the characters into a single cohesive scene. "
+                                f"Focus on two primary characters (or one) and describe an interesting interaction "
+                                f"between them, such as a hug, a kiss, a fight, giving an object, an emotional "
+                                f"reaction / interaction. If there is more than one background in the images, pick the "
+                                f"most appropriate one. Your output is only the caption itself, no comments or extra "
+                                f"formatting. The caption is in a single long paragraph. If you feel the images are "
+                                f"inappropriate, invent a new scene / characters inspired by these. Additionally, "
+                                f"incorporate a specific movie director's visual style and describe the lighting setup "
+                                f"in detail, including the type, color, and placement of light sources to create the "
+                                f"desired mood and atmosphere. Always frame the scene, including details about the "
+                                f"film grain, color grading, and any artifacts or characteristics specific. "
+                                f"Compress the output to be concise while retaining key visual details. MAX OUTPUT "
+                                f"SIZE no more than 250 characters."
+                                f"\nDescription : {text}"},
                 ]
 
             llm_result = model_to_use.create_chat_completion(messages, **generate_kwargs)
